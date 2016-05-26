@@ -140,15 +140,15 @@ module.exports = {
             },
 			{
 				test: /\.styl$/,
-				loader: isProd ? ExtractTextPlugin.extract('style!css?sourceMap!postcss!stylus') : 'style!css?sourceMap!postcss!stylus'
+				loader: isProd ? ExtractTextPlugin.extract('style!css!postcss!stylus') : 'style!css?sourceMap!postcss!stylus'
             },
 			{
 				test: /\.scss$/,
-				loader: isProd ? ExtractTextPlugin.extract('css?sourceMap!postcss!sass') : 'style!css?sourceMap!postcss!sass'
+				loader: isProd ? ExtractTextPlugin.extract('css!postcss!sass') : 'style!css?sourceMap!postcss!sass'
 			},
 			{
 				test: /\.css$/,
-				loader: isProd ? ExtractTextPlugin.extract('style!css?sourceMap') : 'style!css?sourceMap'
+				loader: isProd ? ExtractTextPlugin.extract('style!css') : 'style!css?sourceMap'
             },
 			{
 				test: /\.(woff|woff2|ttf|eot|svg)(\?]?.*)?$/,
@@ -171,7 +171,7 @@ module.exports = {
 	plugins: plugins,
 	debug: !isProd,
 	//ExtractTextPlugin导出css生成sourcemap必须 devtool: 'source-map'且css?sourceMap
-	devtool: isProd ? 'source-map' : 'eval',
+	devtool: 'eval',
 	//server配置
 	devServer: {
 		contentBase: srcPath,
@@ -206,7 +206,7 @@ module.exports = {
 		curly: true,
 		expr: true
 	},
-	//第三方包扩展，用来配置无module.exports的第三方库，require('zepto')时会自动module.exports = Zepto;
+	//第三方包独立打包，用来配置无module.exports的第三方库，require('zepto')时会自动导出module.exports = Zepto;
 	externals: {
 		zepto: 'Zepto'
 	},

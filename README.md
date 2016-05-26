@@ -1,6 +1,6 @@
 # [webpack](http://webpack.github.io/docs/)-demo
 
-> 本项目基于webpack打包，所有入口文件读取基于约定，命名为*.entry.js即可，编译后会基于index.js的文件夹名称生成对应的html,js,css
+> 本项目基于webpack打包，所有入口文件读取基于约定，命名为*.entry.js即可，编译后会基于匹配出的文件名称生成对应的html,js,css
 
 ## Install
 
@@ -59,9 +59,8 @@ webpack/
 ```
 ##注意事项
 
-* 页面中用到common时可通过require('common')或者直接使用common对象即可
-* components组件每个页面按需加载，通过require(['sidebar'],function(sidebar){})异步加载的方式加载
-* 所有的页面访问，components组件导入都是访问的目录名称
+* common模块默认所有页面都加载，所以只有非常公共的功能才放到common中
+* components下组件已配置别名，无需按照目录require，通过require(['sidebar'],function(sidebar){})异步加载的方式加载
 * src/template.ejs为全局模板文件，所有页面模板会基于该文件生成，同时自动注入依赖的js，css资源
 
 
