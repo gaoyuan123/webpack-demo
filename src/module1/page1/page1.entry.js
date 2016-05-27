@@ -1,4 +1,6 @@
+
 require('./style.scss');
+var $ = require('zepto');
 var model = require('./model.js');
 var template = require('./_list.html');
 var common = require('common');

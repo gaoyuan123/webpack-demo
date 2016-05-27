@@ -169,9 +169,8 @@ module.exports = {
 		})];
 	},
 	plugins: plugins,
-	debug: !isProd,
 	//ExtractTextPlugin导出css生成sourcemap必须 devtool: 'source-map'且css?sourceMap
-	devtool: 'eval',
+	//devtool: 'eval',
 	//server配置
 	devServer: {
 		contentBase: srcPath,

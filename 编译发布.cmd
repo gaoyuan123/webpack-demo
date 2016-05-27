@@ -9,7 +9,7 @@ rem color 04
 	echo                    编译发布
 	echo -------------------------------------------------
 	echo.
-	npm run build && echo 发布成功,按任意键退出... & pause>nul
+	npm run build && npm run server && echo 发布成功,按任意键退出... & pause>nul
 
 
 	

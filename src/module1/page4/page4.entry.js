@@ -9,9 +9,10 @@ console.log('test:',test);
 $(function(){
 	$(document.body).append(template);
 });
-require.ensure([], function(require) {
-  require.include("sidebar");
-  var dropdownMenu = require('dropdownMenu');
-  console.log(dropdownMenu);
+document.addEventListener('click',function(){
+	require.ensure([], function(require) {
+	  require.include("sidebar");
+	  var dropdownMenu = require('dropdownMenu');
+	  console.log(dropdownMenu);
+	});
 });
-	

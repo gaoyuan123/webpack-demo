@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///webpack:///src/common/style.scss"],"names":[],"mappings":"AAAA,KAAK,+CAA+B,sBAAsB,cAAc,CAAC","file":"common/common-b1a276c3e14e592354aa.css","sourcesContent":["body{background-image:url(test.jpg);background-color:#fff;font-size:14px}\n\n\n\n/** WEBPACK FOOTER **\n ** webpack:///src/common/style.scss\n **/"],"sourceRoot":""}
