@@ -15,6 +15,7 @@ var isProd = args.prod;
 var buildPath = './build/';
 var srcPath = './src/';
 var publicPath = '/';
+var libsPath = srcPath + 'libs/';
 //html模板文件
 var tempatePath = path.join(srcPath, 'template.ejs');
 var zeptoPath = './node_modules/zepto/zepto.min.js';
@@ -25,6 +26,8 @@ var entryJs = {};
 var alias = {
 	common: path.join(__dirname, srcPath, 'common/common.entry.js')
 };
+//第三方库
+var externals = require(libsPath + 'config.json');
 
 var plugins = [
 	//代码中直接使用common变量，编译时会自动require('common')
@@ -40,8 +43,8 @@ var plugins = [
 	//copy zepto
     new CopyWebpackPlugin([
 		{
-			from: zeptoPath,
-			to: 'libs/zepto.min.js'
+			from: libsPath,
+			to: 'libs'
 		}
     ])
 ];
@@ -115,12 +118,10 @@ module.exports = {
 		//别名，配置后可以通过别名导入模块
 		alias: alias
 	},
+	//第三方包独立打包，用来配置无module.exports的第三方库，require('zepto')时会自动导出module.exports = Zepto;
+	externals: externals,
 	//ExtractTextPlugin导出css生成sourcemap必须 devtool: 'source-map'且css?sourceMap
 	devtool: 'source-map',
-	//第三方包独立打包，用来配置无module.exports的第三方库，require('zepto')时会自动导出module.exports = Zepto;
-	externals: {
-		zepto: 'Zepto'
-	},
 	//server配置
 	devServer: {
 		contentBase: srcPath,
