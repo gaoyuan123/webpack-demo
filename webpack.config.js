@@ -18,7 +18,6 @@ var publicPath = '/';
 var libsPath = srcPath + 'libs/';
 //html模板文件
 var tempatePath = path.join(srcPath, 'template.ejs');
-var zeptoPath = './node_modules/zepto/zepto.min.js';
 var commonEntryName = 'common/common';
 //入口
 var entryJs = {};
@@ -27,7 +26,7 @@ var alias = {
 	common: path.join(__dirname, srcPath, 'common/common.entry.js')
 };
 //第三方库
-var externals = require(libsPath + 'config.json');
+var externals = require(libsPath + 'externals.config.json');
 
 var plugins = [
 	//代码中直接使用common变量，编译时会自动require('common')
@@ -44,7 +43,7 @@ var plugins = [
     new CopyWebpackPlugin([
 		{
 			from: libsPath,
-			to: 'libs'
+			to: libsPath.replace(srcPath)
 		}
     ])
 ];
