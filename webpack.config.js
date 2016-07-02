@@ -42,7 +42,7 @@ module.exports = {
 			__DEBUG__: !isProd
 		}),
 		//打包公共模块
-		new CommonsChunkPlugin(commonEntryName, isProd ? '[name].[hash:8].js' : '[name].js'),
+		new CommonsChunkPlugin(commonEntryName, isProd ? '[name].[chunkhash:8].js' : '[name].js'),
 		//copy libs
 		new CopyWebpackPlugin([
 			{
@@ -145,7 +145,7 @@ if (isProd) {
 		}),
 		new webpack.optimize.OccurenceOrderPlugin(),
 		//css单独打包
-		new ExtractTextPlugin('[name].[chunkhash:8].css'),
+		new ExtractTextPlugin('[name].[hash:8].css'),
 		new AssetsPlugin({
 			filename: 'build/assets-map.json',
 			update: true,
