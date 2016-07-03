@@ -1,0 +1,10 @@
+{
+	"buildPath": "./build/",
+	"srcPath": "./src/",
+	"publicPath": "/",
+	"libsPath": "libs/",
+	"tempatePath": "template.ejs",
+	"commonEntry": "common/common.entry.js",
+	"components": "components/**/*.entry.js",
+	"entrys": "**/*.entry.js"
+}
