@@ -198,7 +198,11 @@ glob.sync(projectConfig.entrys, {
 			filename: entryName + '.html',
 			template: projectConfig.srcPath + projectConfig.tempatePath,
 			chunks: [entryName, commonEntryName],
-			minify: isProd ? {} : false,
+			minify: isProd ? {
+				removeComments: true,
+				collapseWhitespace: true,
+				removeAttributeQuotes: true
+			} : false,
 			zepto: projectConfig.publicPath + 'libs/zepto.min.js'
 		}));
 		log(entryPath);
