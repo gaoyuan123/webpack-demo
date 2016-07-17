@@ -12,6 +12,8 @@ var path = require('path');
 var glob = require('glob');
 // parameters
 var isProd = args.prod;
+var scriptReg = /<script.+src=[\"|\']([^\?|\s]+)\??.*[\"|\'].*><\/script>/ig;
+var styleReg = /<link.+href=[\"|\']([^\?|\s]+)\??.*[\"|\'].*>/ig;
 
 var projectConfig = require('./project.config.json');
 var commonEntryName = projectConfig.commonEntry.replace('.entry.js', '');
@@ -182,14 +184,28 @@ glob.sync(projectConfig.components, {
 log('\r\n =============================================');
 log('查找到page入口文件：');
 var entryConfig = {
-	attr: { // attributes for index chunk
-
-	},
 	inline: { // inline or not for index chunk
-		js: isProd?true:false,
-		css: isProd?true:false
+		js: isProd ? true : false,
+		css: isProd ? true : false
 	}
 }
+
+function templateContent(content) {
+	content = content.replace(scriptReg, function (script, route) {
+		if (route.indexOf(projectConfig.publicPath) != 0) {
+			return script.replace(route, projectConfig.publicPath + route);
+		}
+		return script;
+	});
+	content = content.replace(styleReg, function (script, route) {
+		if (route.indexOf(projectConfig.publicPath) != 0) {
+			return script.replace(route, projectConfig.publicPath + route);
+		}
+		return script;
+	});
+	return content;
+}
+
 glob.sync(projectConfig.entrys, {
 	cwd: projectConfig.srcPath
 }).forEach(function (entryPath) {
@@ -198,9 +214,7 @@ glob.sync(projectConfig.entrys, {
 	var isCommon = entryName == commonEntryName
 	if (!module.exports.resolve.alias[aliaName] || isCommon) {
 		module.exports.entry[entryName] = [path.resolve(projectConfig.srcPath, entryPath)];
-		var chunks = {
-//			'libs/zepto.min': null
-		};
+		var chunks = {};
 		chunks[commonEntryName] = null;
 		chunks[entryName] = entryConfig;
 		//加载html生成插件
@@ -213,12 +227,10 @@ glob.sync(projectConfig.entrys, {
 				removeAttributeQuotes: true
 			} : false,
 			chunks: chunks,
-			templateContent:function(content){
-				content = content.replace('<script','<script  type="text/javascript" src="'+projectConfig.publicPath+'libs/zepto.min.js"></script>\n<script')
-				return content;
-			}
+			templateContent: templateContent
 		}));
 		log(entryPath);
 	}
 });
+
 log('\r\n =============================================');
