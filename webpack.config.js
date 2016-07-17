@@ -212,7 +212,11 @@ glob.sync(projectConfig.entrys, {
 				collapseWhitespace: true,
 				removeAttributeQuotes: true
 			} : false,
-			chunks: chunks
+			chunks: chunks,
+			templateContent:function(content){
+				content = content.replace('<script','<script  type="text/javascript" src="'+projectConfig.publicPath+'libs/zepto.min.js"></script>\n<script')
+				return content;
+			}
 		}));
 		log(entryPath);
 	}
