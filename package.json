@@ -1,53 +1,53 @@
 {
-	"name": "webpack",
-	"version": "0.0.1",
-	"description": "",
-	"engines": {
-		"node": ">=4.0.0"
-	},
-	"repository": "",
-	"license": "MIT",
-	"main": "",
-	"scripts": {
-		"start": "webpack-dev-server --hot --inline -d",
-		"build": "webpack --progress --prod -p",
-		"server": "http-server ./build -o"
-	},
-	"author": {
-		"name": "高原",
-		"email": "gaoyuanzlz@gmail.com",
-		"url": ""
-	},
-	"files": [],
-	"keywords": [
+  "name": "webpack",
+  "version": "0.0.1",
+  "description": "",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "repository": "",
+  "license": "MIT",
+  "main": "",
+  "scripts": {
+    "start": "webpack-dev-server --hot --inline -d",
+    "build": "webpack --progress --prod -p",
+    "server": "http-server ./build -o"
+  },
+  "author": {
+    "name": "高原",
+    "email": "gaoyuanzlz@gmail.com",
+    "url": ""
+  },
+  "files": [],
+  "keywords": [
     "webpack"
   ],
-	"devDependencies": {
-		"assets-webpack-plugin": "^3.1.0",
-		"autoprefixer": "^6.0.3",
-		"babel-loader": "^5.3.2",
-		"copy-webpack-plugin": "^0.3.3",
-		"css-loader": "^0.23.1",
-		"extract-text-webpack-plugin": "^0.9.1",
-		"file-loader": "^0.8.4",
-		"glob": "^5.0.14",
-		"html-loader": "^0.4.3",
-		"html-webpack-plugin": "^2.9.0",
-		"image-webpack-loader": "^1.7.0",
-		"jshint-loader": "*",
-		"postcss-loader": "^0.8.1",
-		"sass-loader": "^3.2.0",
-		"style-loader": "^0.13.1",
-		"url-loader": "^0.5.6",
-		"webpack": "^1.13",
-		"webpack-dev-server": "^1.10.1",
-		"yargs": "^3.25.0",
-		"http-server": "^0.9.0",
-		"happypack": "^2.1.1",
-		"html-res-webpack-plugin": "git+https://github.com/gaoyuan123/html-res-webpack-plugin.git"
-	},
-	"dependencies": {
-		"scriptjs": "^2.5.8",
-		"zepto": "~1.0.1"
-	}
+  "devDependencies": {
+    "assets-webpack-plugin": "^3.1.0",
+    "autoprefixer": "^6.0.3",
+    "babel-loader": "^5.3.2",
+    "copy-webpack-plugin": "^0.3.3",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^0.9.1",
+    "file-loader": "^0.8.4",
+    "glob": "^5.0.14",
+    "html-loader": "^0.4.3",
+    "html-webpack-plugin": "^2.9.0",
+    "image-webpack-loader": "^1.7.0",
+    "jshint-loader": "*",
+    "postcss-loader": "^0.8.1",
+    "sass-loader": "^3.2.0",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.6",
+    "webpack": "^1.13",
+    "webpack-dev-server": "^1.10.1",
+    "yargs": "^3.25.0",
+    "http-server": "^0.9.0",
+    "happypack": "^2.1.1",
+    "html-res-webpack-plugin": "git+https://github.com/gaoyuan123/html-res-webpack-plugin.git"
+  },
+  "dependencies": {
+    "scriptjs": "^2.5.8",
+    "zepto": "~1.0.1"
+  }
 }
