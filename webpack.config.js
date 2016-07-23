@@ -64,7 +64,7 @@ module.exports = {
     //第三方包独立打包，用来配置无module.exports的第三方库，require('zepto')时会自动导出module.exports = Zepto;
     externals: externals,
     //ExtractTextPlugin导出css生成sourcemap必须 devtool: 'source-map'且css?sourceMap
-    devtool: isProd ? '' : 'cheap-source-map',
+    devtool: isProd ? '' : 'cheap-eval-source-map',
     //server配置
     devServer: {
 //        contentBase: srcPath,
