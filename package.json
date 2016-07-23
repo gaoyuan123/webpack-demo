@@ -38,7 +38,7 @@
     "jshint": "*",
     "jshint-loader": "*",
     "postcss-loader": "*",
-	"node-sass": "*",
+    "node-sass": "*",
     "sass-loader": "*",
     "style-loader": "*",
     "url-loader": "*",
@@ -47,7 +47,8 @@
     "yargs": "*",
     "http-server": "*",
     "happypack": "*",
-    "html-res-webpack-plugin": "*"
+    "html-res-webpack-plugin": "*",
+    "copy-webpack-plugin-hash": "*"
   },
   "dependencies": {
     "scriptjs": "^2.5.8",

@@ -19,7 +19,7 @@ if(true){
 }else{
 	console.log('sidebar2',require('sidebar'));
 }
-require.ensure([],function(require){
-	var dropdownMemu = require('dropdownMenu');
+require(['sidebar','dropdownMenu'],function(sidebar,dropdownMemu){
+	console.log('sidebar',sidebar);
 	console.log('dropdownMenu',dropdownMemu);
 });
