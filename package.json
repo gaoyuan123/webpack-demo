@@ -25,6 +25,7 @@
   "devDependencies": {
     "assets-webpack-plugin": "*",
     "autoprefixer": "*",
+    "babel-core": "*",
     "babel-loader": "*",
     "copy-webpack-plugin": "*",
     "css-loader": "*",
