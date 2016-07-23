@@ -67,7 +67,7 @@ module.exports = {
     devtool: isProd ? '' : 'cheap-source-map',
     //server配置
     devServer: {
-        contentBase: srcPath,
+//        contentBase: srcPath,
         headers: {
             "Cache-Control": "no-cache"
         },
