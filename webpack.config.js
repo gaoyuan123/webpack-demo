@@ -16,10 +16,15 @@ var isProd = args.prod;
 //var styleReg = /<link.+href=[\"|\']([^\?|\s]+)\??.*[\"|\'].*>/ig;
 
 var projectConfig = require('./project.config.json');
+var srcPath = path.resolve(projectConfig.srcPath);
+
 //第三方库
 var externals = require(projectConfig.srcPath + projectConfig.libsPath + 'externals.config.json');
+
 //导出配置
 module.exports = {
+    //entry配置项的根目录（绝对路径）
+    context: srcPath,
     entry: {},
     output: {
         path: path.resolve(projectConfig.buildPath),
@@ -44,14 +49,14 @@ module.exports = {
         }),
         //copy libs
         new CopyWebpackPlugin([{
-            from: projectConfig.srcPath + projectConfig.libsPath,
+            from: projectConfig.libsPath,
             to: projectConfig.libsPath
         }], {
             namePattern: isProd ? '[name]-[contenthash:6].js' : '[name].js'
         })
     ],
     resolve: {
-        root: [path.resolve(projectConfig.srcPath)],
+        root: [srcPath],
         extensions: ['', '.js', '.css', '.scss', '.json', '.html'],
         //别名，配置后可以通过别名导入模块
         alias: []
@@ -62,7 +67,7 @@ module.exports = {
     devtool: isProd ? '' : 'cheap-source-map',
     //server配置
     devServer: {
-        contentBase: projectConfig.srcPath,
+        contentBase: srcPath,
         headers: {
             "Cache-Control": "no-cache"
         },
@@ -100,9 +105,9 @@ module.exports = {
         }, {
             test: /\.(jpe?g|png|gif|svg)$/i,
             loaders: isProd ? [
-                'url?limit=8192&name=images/[name].[hash:8].[ext]',
+                'url?limit=8192&name=[path][name].[hash:8].[ext]',
                 'image-webpack?bypassOnDebug&optimizationLevel=5&interlaced=false'
-            ] : ['url?limit=1&name=images/[name].[ext]']
+            ] : ['file?name=[path][name].[ext]']
         }]
     },
     postcss: function() {
@@ -145,11 +150,11 @@ if (isProd) {
         new webpack.optimize.OccurenceOrderPlugin(),
         //css单独打包
         new ExtractTextPlugin('[name].[hash:8].css')
-//        new AssetsPlugin({
-//            filename: 'build/assets-map.json',
-//            update: true,
-//            prettyPrint: true
-//        })
+        //        new AssetsPlugin({
+        //            filename: 'build/assets-map.json',
+        //            update: true,
+        //            prettyPrint: true
+        //        })
     )
 }
 
@@ -161,13 +166,12 @@ log('=============================================');
 log('查找到common入口文件：');
 var commonEntryName;
 glob.sync(projectConfig.commonEntry, {
-    cwd: projectConfig.srcPath
+    cwd: srcPath
 }).forEach(function(entryPath) {
     var aliaName = path.basename(entryPath, '.entry.js');
     var entryName = commonEntryName = path.dirname(entryPath) + '/' + aliaName;
-    var relpath = path.resolve(projectConfig.srcPath, entryPath);
-    module.exports.resolve.alias[aliaName] = relpath;
-    module.exports.entry[entryName] = [relpath];
+    module.exports.resolve.alias[aliaName] = entryPath;
+    module.exports.entry[entryName] = [entryPath];
     //打包公共模块
     module.exports.plugins.push(new CommonsChunkPlugin(entryName, isProd ? '[name].[chunkhash:8].js' : '[name].js'))
     log(entryPath);
@@ -177,10 +181,10 @@ log('\r\n =============================================');
 log('查找到components入口文件：');
 
 glob.sync(projectConfig.components, {
-    cwd: projectConfig.srcPath
+    cwd: srcPath
 }).forEach(function(entryPath) {
     var aliaName = path.basename(entryPath, '.entry.js');
-    module.exports.resolve.alias[aliaName] = path.resolve(projectConfig.srcPath, entryPath);
+    module.exports.resolve.alias[aliaName] = entryPath;
     log(entryPath);
 });
 
@@ -196,12 +200,12 @@ var entryConfig = {
 }
 
 glob.sync(projectConfig.entrys, {
-    cwd: projectConfig.srcPath
+    cwd: srcPath
 }).forEach(function(entryPath) {
     var aliaName = path.basename(entryPath, '.entry.js');
     var entryName = path.dirname(entryPath) + '/' + aliaName;
     if (!module.exports.resolve.alias[aliaName]) {
-        module.exports.entry[entryName] = [path.resolve(projectConfig.srcPath, entryPath)];
+        module.exports.entry[entryName] = [entryPath];
         var chunks = {
             'libs/zepto': null
         };
@@ -210,7 +214,7 @@ glob.sync(projectConfig.entrys, {
         //加载html生成插件
         module.exports.plugins.push(new HtmlResWebpackPlugin({
             filename: entryName + '.html',
-            template: path.join(projectConfig.srcPath, entryName + '.html'),
+            template: path.join(srcPath, entryName + '.html'),
             htmlMinify: isProd ? {
                 removeComments: true,
                 collapseWhitespace: true,
