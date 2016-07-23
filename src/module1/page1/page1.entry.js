@@ -11,3 +11,15 @@ console.log('template:',template);
 $(function(){
 	$(document.body).append(template);
 });
+
+if(true){
+	require(['sidebar'],function(sidebar){
+		console.log('sidebar1',sidebar);
+	});
+}else{
+	console.log('sidebar2',require('sidebar'));
+}
+require.ensure([],function(require){
+	var dropdownMemu = require('dropdownMenu');
+	console.log('dropdownMenu',dropdownMemu);
+});
