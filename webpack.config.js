@@ -116,6 +116,7 @@ module.exports = {
         })];
     },
     jshint: {
+		esversion：5,
         // any jshint option http://www.jshint.com/docs/options/
         // i. e.
         camelcase: true,
@@ -131,7 +132,9 @@ module.exports = {
         asi: true,
         boss: true,
         curly: true,
-        expr: true
+        expr: true,
+		undef:true,
+		unused:true
     },
 };
 
