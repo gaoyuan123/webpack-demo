@@ -116,7 +116,7 @@ module.exports = {
         })];
     },
     jshint: {
-		esversion：5,
+		esversion:5,
         // any jshint option http://www.jshint.com/docs/options/
         // i. e.
         camelcase: true,
@@ -168,7 +168,7 @@ function log(msg) {
 log('=============================================');
 log('查找到common入口文件：');
 var commonEntryName;
-glob.sync(projectConfig.commonEntry, {
+projectConfig.commonEntry && glob.sync(projectConfig.commonEntry, {
     cwd: srcPath
 }).forEach(function(entryPath) {
     var aliaName = path.basename(entryPath, '.entry.js');
@@ -183,7 +183,7 @@ glob.sync(projectConfig.commonEntry, {
 log('\r\n =============================================');
 log('查找到components入口文件：');
 
-glob.sync(projectConfig.components, {
+projectConfig.components && glob.sync(projectConfig.components, {
     cwd: srcPath
 }).forEach(function(entryPath) {
     var aliaName = path.basename(entryPath, '.entry.js');
