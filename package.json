@@ -40,6 +40,7 @@
     "file-loader": "*",
     "html-loader": "*",
     "babel-core": "*",
+	"babel-preset-es2015":"*",
     "babel-loader": "*",
     "image-webpack-loader": "*",
     "jshint": "*",
