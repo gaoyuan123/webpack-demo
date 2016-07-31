@@ -43,8 +43,6 @@ module.exports = {
         new HappyPack({
             // loaders is the only required parameter:
             loaders: ['babel?cacheDirectory&plugins[]=transform-runtime'],
-
-            // customize as needed, see Configuration below
         }),
         new webpack.DefinePlugin({
             __DEBUG__: !isProd,
@@ -70,7 +68,7 @@ module.exports = {
     devtool: isProd ? '' : 'cheap-eval-source-map',
     //server配置
     devServer: {
-        //        contentBase: srcPath,
+        //contentBase: srcPath,
         headers: {
             "Cache-Control": "no-cache"
         },
