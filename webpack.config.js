@@ -8,7 +8,6 @@ let CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 let HappyPack = require('happypack');
 let autoprefixer = require('autoprefixer');
 let args = require('yargs').argv;
-//let fs = require('fs');
 let path = require('path');
 let glob = require('glob');
 // parameters
@@ -43,7 +42,7 @@ module.exports = {
 		}),**/
         new HappyPack({
             // loaders is the only required parameter:
-            loaders: ['babel?cacheDirectory'],
+            loaders: ['babel?cacheDirectory&plugins[]=transform-runtime'],
 
             // customize as needed, see Configuration below
         }),
@@ -148,13 +147,6 @@ if (isProd) {
     module.exports.plugins.push(
         new webpack.NoErrorsPlugin(),
         new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            },
-            //			mangle: false
-        }),
-        new webpack.optimize.OccurenceOrderPlugin(),
         //css单独打包
         new ExtractTextPlugin('[name].[hash:8].css')
         //        new AssetsPlugin({

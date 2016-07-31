@@ -11,6 +11,7 @@
   "scripts": {
     "start": "webpack-dev-server --hot --inline -d",
     "build": "rm -rf build/ && webpack --progress -p --resinline",
+    "buildoffline": "rm -rf build/ && webpack --progress -p",
     "server": "http-server ./build -o"
   },
   "author": {
@@ -23,35 +24,36 @@
     "webpack"
   ],
   "devDependencies": {
-    "assets-webpack-plugin": "*",
-    "autoprefixer": "*",
-    "babel-core": "*",
-    "babel-loader": "*",
-    "copy-webpack-plugin": "*",
-    "css-loader": "*",
-    "extract-text-webpack-plugin": "*",
-    "file-loader": "*",
     "glob": "*",
-    "html-loader": "*",
-    "html-webpack-plugin": "*",
-    "image-webpack-loader": "*",
-    "jshint": "*",
-    "jshint-loader": "*",
-    "postcss-loader": "*",
-    "node-sass": "*",
-    "sass-loader": "*",
-    "style-loader": "*",
-    "url-loader": "*",
+    "yargs": "*",
     "webpack": "*",
     "webpack-dev-server": "*",
-    "yargs": "*",
     "http-server": "*",
     "happypack": "*",
     "html-res-webpack-plugin": "*",
-    "copy-webpack-plugin-hash": "*"
+    "extract-text-webpack-plugin": "*",
+    "copy-webpack-plugin-hash": "*",
+    "assets-webpack-plugin": "*",
+    "babel-plugin-transform-runtime": "^6.12.0",
+
+    "css-loader": "*",
+    "file-loader": "*",
+    "html-loader": "*",
+    "babel-core": "*",
+    "babel-loader": "*",
+    "image-webpack-loader": "*",
+    "jshint": "*",
+    "jshint-loader": "*",
+    "node-sass": "*",
+    "autoprefixer": "*",
+    "postcss-loader": "*",
+    "sass-loader": "*",
+    "style-loader": "*",
+    "url-loader": "*",
+	"script-loader": "*"
+
   },
   "dependencies": {
-    "scriptjs": "^2.5.8",
-    "zepto": "~1.0.1"
+    "scriptjs": "^2.5.8"
   }
 }
