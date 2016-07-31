@@ -166,7 +166,7 @@ projectConfig.commonEntry && glob.sync(projectConfig.commonEntry, {
     let aliaName = path.basename(entryPath, '.entry.js');
     let entryName = commonEntryName = path.dirname(entryPath) + '/' + aliaName;
     module.exports.resolve.alias[aliaName] = entryPath;
-    module.exports.entry[entryName] = [entryPath];
+    module.exports.entry[entryName] = entryPath;
     //打包公共模块
     module.exports.plugins.push(new CommonsChunkPlugin(entryName, isProd ? '[name].[chunkhash:8].js' : '[name].js'))
     log(entryPath);
@@ -200,7 +200,7 @@ glob.sync(projectConfig.entrys, {
     let aliaName = path.basename(entryPath, '.entry.js');
     let entryName = path.dirname(entryPath) + '/' + aliaName;
     if (!module.exports.resolve.alias[aliaName]) {
-        module.exports.entry[entryName] = [entryPath];
+        module.exports.entry[entryName] = entryPath;
         let chunks = {
             'libs/zepto': null
         };
