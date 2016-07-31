@@ -213,10 +213,9 @@ glob.sync(projectConfig.entrys, {
             htmlMinify: isProd ? {
                 removeComments: true,
                 collapseWhitespace: true,
-                removeAttributeQuotes: true
+//                removeAttributeQuotes: true
             } : false,
             chunks: chunks,
-            //            templateContent: templateContent
         }));
         log(entryPath);
     }
