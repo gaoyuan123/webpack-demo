@@ -136,26 +136,24 @@ module.exports = {
         boss: true,
         curly: true,
         expr: true,
-//        undef: true,
+        //        undef: true,
         unused: true
     },
 };
 
 
 //发布时加载插件
-if (isProd) {
-    module.exports.plugins.push(
-        new webpack.NoErrorsPlugin(),
-        new webpack.optimize.DedupePlugin(),
-        //css单独打包
-        new ExtractTextPlugin('[name].[hash:8].css')
-        //        new AssetsPlugin({
-        //            filename: 'build/assets-map.json',
-        //            update: true,
-        //            prettyPrint: true
-        //        })
-    )
-}
+isProd && module.exports.plugins.push(
+    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    //css单独打包
+    new ExtractTextPlugin('[name].[hash:8].css')
+    //        new AssetsPlugin({
+    //            filename: 'build/assets-map.json',
+    //            update: true,
+    //            prettyPrint: true
+    //        })
+)
 
 function log(msg) {
     console.log(' ' + msg);
@@ -193,8 +191,8 @@ log('\r\n =============================================');
 log('查找到page入口文件：');
 let entryConfig = {
     inline: { // inline or not for index chunk
-        js: !!resInline,
-        css: !!resInline
+        js: !! resInline,
+        css: !! resInline
     }
 }
 
