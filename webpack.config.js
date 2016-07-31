@@ -1,25 +1,28 @@
-var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var HtmlResWebpackPlugin = require('html-res-webpack-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin-hash');
-var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
-var AssetsPlugin = require('assets-webpack-plugin');
-var HappyPack = require('happypack');
-var autoprefixer = require('autoprefixer');
-var args = require('yargs').argv;
-//var fs = require('fs');
-var path = require('path');
-var glob = require('glob');
+'use strict'
+let webpack = require('webpack');
+let ExtractTextPlugin = require("extract-text-webpack-plugin");
+let HtmlResWebpackPlugin = require('html-res-webpack-plugin');
+let CopyWebpackPlugin = require('copy-webpack-plugin-hash');
+let CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+//let AssetsPlugin = require('assets-webpack-plugin');
+let HappyPack = require('happypack');
+let autoprefixer = require('autoprefixer');
+let args = require('yargs').argv;
+//let fs = require('fs');
+let path = require('path');
+let glob = require('glob');
 // parameters
-var isProd = args.prod;
-//var scriptReg = /<script.+src=[\"|\']([^\?|\s]+)\??.*[\"|\'].*><\/script>/ig;
-//var styleReg = /<link.+href=[\"|\']([^\?|\s]+)\??.*[\"|\'].*>/ig;
+let isProd = args.p;
+let resInline = args.resinline;
 
-var projectConfig = require('./project.config.json');
-var srcPath = path.resolve(projectConfig.srcPath);
+//let scriptReg = /<script.+src=[\"|\']([^\?|\s]+)\??.*[\"|\'].*><\/script>/ig;
+//let styleReg = /<link.+href=[\"|\']([^\?|\s]+)\??.*[\"|\'].*>/ig;
+
+let projectConfig = require('./project.config.json');
+let srcPath = path.resolve(projectConfig.srcPath);
 
 //第三方库
-var externals = require(projectConfig.srcPath + projectConfig.libsPath + 'externals.config.json');
+let externals = require(projectConfig.srcPath + projectConfig.libsPath + 'externals.config.json');
 
 //导出配置
 module.exports = {
@@ -45,7 +48,8 @@ module.exports = {
             // customize as needed, see Configuration below
         }),
         new webpack.DefinePlugin({
-            __DEBUG__: !isProd
+            __DEBUG__: !isProd,
+            __PROD__: isProd
         }),
         //copy libs
         new CopyWebpackPlugin([{
@@ -67,7 +71,7 @@ module.exports = {
     devtool: isProd ? '' : 'cheap-eval-source-map',
     //server配置
     devServer: {
-//        contentBase: srcPath,
+        //        contentBase: srcPath,
         headers: {
             "Cache-Control": "no-cache"
         },
@@ -116,7 +120,7 @@ module.exports = {
         })];
     },
     jshint: {
-		esversion:5,
+        esversion: 6,
         // any jshint option http://www.jshint.com/docs/options/
         // i. e.
         camelcase: true,
@@ -133,8 +137,8 @@ module.exports = {
         boss: true,
         curly: true,
         expr: true,
-		undef:true,
-		unused:true
+//        undef: true,
+        unused: true
     },
 };
 
@@ -167,12 +171,12 @@ function log(msg) {
 
 log('=============================================');
 log('查找到common入口文件：');
-var commonEntryName;
+let commonEntryName;
 projectConfig.commonEntry && glob.sync(projectConfig.commonEntry, {
     cwd: srcPath
 }).forEach(function(entryPath) {
-    var aliaName = path.basename(entryPath, '.entry.js');
-    var entryName = commonEntryName = path.dirname(entryPath) + '/' + aliaName;
+    let aliaName = path.basename(entryPath, '.entry.js');
+    let entryName = commonEntryName = path.dirname(entryPath) + '/' + aliaName;
     module.exports.resolve.alias[aliaName] = entryPath;
     module.exports.entry[entryName] = [entryPath];
     //打包公共模块
@@ -186,7 +190,7 @@ log('查找到components入口文件：');
 projectConfig.components && glob.sync(projectConfig.components, {
     cwd: srcPath
 }).forEach(function(entryPath) {
-    var aliaName = path.basename(entryPath, '.entry.js');
+    let aliaName = path.basename(entryPath, '.entry.js');
     module.exports.resolve.alias[aliaName] = entryPath;
     log(entryPath);
 });
@@ -195,21 +199,21 @@ projectConfig.components && glob.sync(projectConfig.components, {
 //读取page配置文件
 log('\r\n =============================================');
 log('查找到page入口文件：');
-var entryConfig = {
+let entryConfig = {
     inline: { // inline or not for index chunk
-        js: isProd ? true : false,
-        css: isProd ? true : false
+        js: !!resInline,
+        css: !!resInline
     }
 }
 
 glob.sync(projectConfig.entrys, {
     cwd: srcPath
 }).forEach(function(entryPath) {
-    var aliaName = path.basename(entryPath, '.entry.js');
-    var entryName = path.dirname(entryPath) + '/' + aliaName;
+    let aliaName = path.basename(entryPath, '.entry.js');
+    let entryName = path.dirname(entryPath) + '/' + aliaName;
     if (!module.exports.resolve.alias[aliaName]) {
         module.exports.entry[entryName] = [entryPath];
-        var chunks = {
+        let chunks = {
             'libs/zepto': null
         };
         if (commonEntryName) chunks[commonEntryName] = null;

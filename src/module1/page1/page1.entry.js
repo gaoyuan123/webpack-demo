@@ -12,7 +12,7 @@ $(function(){
 	$(document.body).append(template);
 });
 
-if(true){
+if(__DEBUG__){
 	require(['sidebar'],function(sidebar){
 		console.log('sidebar1',sidebar);
 	});

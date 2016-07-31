@@ -10,7 +10,7 @@
   "main": "",
   "scripts": {
     "start": "webpack-dev-server --hot --inline -d",
-    "build": "rm -rf build/ && webpack --progress --prod -p",
+    "build": "rm -rf build/ && webpack --progress -p --resinline",
     "server": "http-server ./build -o"
   },
   "author": {
