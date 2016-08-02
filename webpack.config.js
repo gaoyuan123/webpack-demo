@@ -146,7 +146,7 @@ isProd && module.exports.plugins.push(
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.DedupePlugin(),
     //css单独打包
-    new ExtractTextPlugin('[name].[hash:8].css')
+    new ExtractTextPlugin('[name].[contenthash:8].css')
     //        new AssetsPlugin({
     //            filename: 'build/assets-map.json',
     //            update: true,
