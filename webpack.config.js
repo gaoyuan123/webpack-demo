@@ -61,7 +61,7 @@ module.exports = {
         root: [srcPath],
         extensions: ['', '.js', '.css', '.scss', '.json', '.html'],
         //别名，配置后可以通过别名导入模块
-        alias: []
+        alias: {}
     },
     //第三方包独立打包，用来配置无module.exports的第三方库，require('zepto')时会自动导出module.exports = Zepto;
     externals: externals,
@@ -169,7 +169,10 @@ projectConfig.commonEntry && glob.sync(projectConfig.commonEntry, {
     module.exports.resolve.alias[aliaName] = entryPath;
     module.exports.entry[entryName] = [entryPath];
     //打包公共模块
-    module.exports.plugins.push(new CommonsChunkPlugin(entryName, isProd ? '[name].[chunkhash:8].js' : '[name].js'))
+    module.exports.plugins.push(new CommonsChunkPlugin({
+        name: entryName,
+        fileName: isProd ? '[name].[chunkhash:8].js' : '[name].js'
+    }))
     log(entryPath);
 });
 
