@@ -30,7 +30,7 @@
     "webpack-dev-server": "*",
     "http-server": "*",
     "happypack": "*",
-    "html-res-webpack-plugin": "*",
+    "html-res-webpack-plugin": "git+https://github.com/gaoyuan123/html-res-webpack-plugin.git",
     "extract-text-webpack-plugin": "*",
     "copy-webpack-plugin-hash": "*",
     "assets-webpack-plugin": "*",

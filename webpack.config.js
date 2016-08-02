@@ -53,6 +53,7 @@ module.exports = {
             from: projectConfig.libsPath,
             to: projectConfig.libsPath
         }], {
+            ignore: ['*.json'],
             namePattern: isProd ? '[name]-[contenthash:6].js' : '[name].js'
         })
     ],
@@ -213,7 +214,7 @@ glob.sync(projectConfig.entrys, {
             htmlMinify: isProd ? {
                 removeComments: true,
                 collapseWhitespace: true,
-//                removeAttributeQuotes: true
+                //                removeAttributeQuotes: true
             } : false,
             chunks: chunks,
         }));
