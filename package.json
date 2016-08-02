@@ -50,8 +50,7 @@
     "postcss-loader": "*",
     "sass-loader": "*",
     "style-loader": "*",
-    "url-loader": "*",
-	"script-loader": "*"
+    "url-loader": "*"
 
   },
   "dependencies": {
