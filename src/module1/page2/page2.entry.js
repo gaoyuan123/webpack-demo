@@ -1,9 +1,10 @@
 import './style.scss';
-import model from './model.js';
+import {name,age} from './model.js';
 import template from './_list.html';
 import common from 'common';
 
-console.log('model:',model);
+console.log('model.name:',name);
+console.log('model.age:',age);
 console.log('template:',template);
 console.log('common:',common);
 //console.log('test:',test);
