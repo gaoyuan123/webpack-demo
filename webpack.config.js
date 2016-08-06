@@ -29,7 +29,7 @@ module.exports = {
     context: srcPath,
     entry: {},
     output: {
-        path: path.resolve(projectConfig.buildPath),
+        path: path.resolve(projectConfig.buildPath,isProd?(resInline?'inline':'link'):''),
         publicPath: projectConfig.publicPath,
         filename: isProd ? '[name].[chunkhash:8].js' : '[name].js',
         chunkFilename: isProd ? 'chunk/[chunkhash:8].chunk.js' : 'chunk/[name].chunk.js',

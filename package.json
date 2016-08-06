@@ -10,8 +10,7 @@
   "main": "",
   "scripts": {
     "start": "webpack-dev-server --hot --inline --host 0.0.0.0 --port 8000",
-    "build": "rm -rf build/ && webpack --progress -p --resinline",
-    "buildoffline": "rm -rf build/ && webpack --progress -p",
+    "build": "rm -rf build/ && webpack --progress -p --resinline && webpack --progress -p",
     "server": "http-server ./build -o"
   },
   "author": {
