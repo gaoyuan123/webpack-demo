@@ -97,13 +97,13 @@ module.exports = {
             loader: 'html'
         }, {
             test: /\.scss$/,
-            loader: isProd ? ExtractTextPlugin.extract('css!postcss!sass') : 'style!css?sourceMap!postcss!sass'
+            loader: isProd ? ExtractTextPlugin.extract('css!postcss!sass') : 'style!css!postcss!sass'
         }, {
             test: /\.css$/,
-            loader: isProd ? ExtractTextPlugin.extract('style!css') : 'style!css?sourceMap'
+            loader: isProd ? ExtractTextPlugin.extract('css') : 'style!css'
         }, {
             test: /\.(woff|woff2|ttf|eot|svg)(\?]?.*)?$/,
-            loader: 'file?name=fonts/[name].[ext]?[hash:8]'
+            loader: 'file?name=[path][name].[ext]?[hash:8]'
         }, {
             test: /\.(jpe?g|png|gif|svg)$/i,
             loaders: isProd ? [
