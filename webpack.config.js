@@ -97,7 +97,7 @@ module.exports = {
             loader: 'html'
         }, {
             test: /\.scss$/,
-            loader: isProd ? ExtractTextPlugin.extract('css!postcss!sass') : 'style!css!postcss!sass'
+            loader: isProd ? ExtractTextPlugin.extract('css!postcss!sass') : 'style!css?sourceMap!postcss!sass'
         }, {
             test: /\.css$/,
             loader: isProd ? ExtractTextPlugin.extract('css') : 'style!css'
