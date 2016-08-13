@@ -80,9 +80,7 @@ module.exports = {
         port: 8000
     },
     module: {
-        noParse: [
-            'node_modules'
-        ],
+        noParse: [],
         preLoaders: isProd ? [{
             test: /\.js$/,
             loader: "jshint-loader",
@@ -160,7 +158,7 @@ function log(msg) {
 
 log('=============================================');
 log('查找到common入口文件：');
-let commonEntryName;
+let commonEntryName = 'common/common';
 projectConfig.commonEntry && glob.sync(projectConfig.commonEntry, {
     cwd: srcPath
 }).forEach(function(entryPath) {
@@ -168,13 +166,12 @@ projectConfig.commonEntry && glob.sync(projectConfig.commonEntry, {
     let entryName = commonEntryName = path.dirname(entryPath) + '/' + aliaName;
     module.exports.resolve.alias[aliaName] = entryPath;
     module.exports.entry[entryName] = [entryPath];
-    //打包公共模块
-    module.exports.plugins.push(new CommonsChunkPlugin({
-        name: entryName,
-        fileName: isProd ? '[name].[chunkhash:8].js' : '[name].js'
-    }))
     log(entryPath);
 });
+//打包公共模块
+module.exports.plugins.push(new CommonsChunkPlugin({
+    name: commonEntryName
+}))
 
 log('\r\n =============================================');
 log('查找到components入口文件：');
